@@ -1,0 +1,11 @@
+.counterNumber {
+    font-weight: bold;
+    font-size: 85px;
+    line-height: 100px;
+    text-align: center;
+    color: #65D9F9;
+}
+
+.counterNumber.red {
+    color: #EE1441;
+}

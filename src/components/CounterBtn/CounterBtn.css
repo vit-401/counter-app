@@ -1,0 +1,19 @@
+.counterBtn {
+    width: 132px;
+    height: 52px;
+    background: #65D9F9;
+    border: 3px solid #65D9F9;
+    border-radius: 15px;
+    margin: 0 auto;
+    margin-top: 18px;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: center;
+    color: #25282D;
+    font-weight: bold;
+    cursor: pointer;
+}
+.counterBtn.disable{
+    background: #406F81;
+    border: 3px solid #406F81;
+}

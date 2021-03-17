@@ -1,0 +1,26 @@
+.counterSetValue{
+    width: 167px;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: center;
+    color: #65D9F9;
+    margin-right: 102px;
+}
+.inputValue{
+    width: 179px;
+    height: 33px;
+    background: #FFFFFF;
+    border: 2px solid #65D9F9;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: #000000;
+    outline-color: #ab5e8e;
+}
+.inputValue.red{
+    background: #EF9BAC;
+    border: 2px solid #F41243;
+}

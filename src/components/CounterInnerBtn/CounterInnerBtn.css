@@ -1,0 +1,11 @@
+.counterInnerBtn {
+    width: 512px;
+    height: 87px;
+    background: #282C36;
+    border: 3px solid #65D9F9;
+    border-radius: 15px;
+    margin: 0 auto;
+    margin-top: 22px;
+    display: flex;
+    justify-content: space-between;
+}
