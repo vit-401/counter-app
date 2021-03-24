@@ -1,69 +1,50 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
 import {CounterDisplay} from "./components/CounterDisplay/CounterDisplay";
 import {CounterInnerBtn} from "./components/CounterInnerBtn/CounterInnerBtn";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./bll/store";
+import {
+    changeValueAC,
+    checkingForErrorsAC,
+    resetValueeAC,
+    setErrorAC, setMaxValueInSettingsAC,
+    setValueInSettingsAC,
+    setValueSettingsAC
+} from "./bll/counter-reduser";
 
-export type handlersType = {
-    incValue: () => void
-    resetValue: () => void
-    valueSettings?: boolean
-    setValue?: () => void,
-    setValueInSettings?: (x: number) => void
-    setMaxValueInSettings?: (x: number) => void
-}
 
 
 function App() {
-    let [value, setValue] = useState<number>(0);
-    let [valueInSettings, setValueInSettings] = useState<any>({startValue: 0, maxValue: 5});
-    let [valueSettings, setValueSettings] = useState<boolean>(false);
-    let [error, setErrorValue] = useState<boolean>(false);
 
-    useEffect(() => {
-        let counterValue = localStorage.getItem('counterValue')
-        if (counterValue) {
-            let newValue = JSON.parse(counterValue)
-            setValue(newValue)
-        }
-    }, [])
-    useEffect(() => {
-        CheckingForErrors(value)
-        localStorage.setItem('counterValue', JSON.stringify(value))
-    }, [value, valueInSettings.startValue, valueInSettings.maxValue])
+    let value = useSelector<AppStateType>(store => store.counter.value)
+    let error = useSelector<AppStateType>(store => store.counter.error)
+    let valueSettings = useSelector<AppStateType>(store => store.counter.valueSettings)
+    let valueInSettings = useSelector<AppStateType>(store => store.counter.valueInSettings)
 
+    const dispatch = useDispatch()
 
-    const handlers: handlersType = {
-
+    const handlers: any = {
         incValue: () => {
-            setValue(value = value + 1)
-            CheckingForErrors(value)
-
+            dispatch(changeValueAC())
         },
         resetValue: () => {
-            setValue(0)
-            setErrorValue(false)
+            dispatch(resetValueeAC())
+            dispatch(setErrorAC(false))
+
         },
         setValue: () => {
-            setValueSettings(!valueSettings)
+            dispatch(setValueSettingsAC())
         },
-        setValueInSettings: (x) => {
-            setValueInSettings({...valueInSettings, startValue: x})
-            setValue(value = x)
-            CheckingForErrors(x)
+        setValueInSettings: (x: number) => {
+            dispatch(setValueInSettingsAC(x))
+            dispatch(checkingForErrorsAC(x))
         },
-        setMaxValueInSettings: (x) => {
-            setValueInSettings({...valueInSettings, maxValue: x})
-            // CheckingForErrors(x)
-        },
-    }
+        setMaxValueInSettings: (x: number) => {
+            dispatch(checkingForErrorsAC(x))
+            dispatch(setMaxValueInSettingsAC(x))
 
-    let CheckingForErrors = (x: number) => {
-        if (x >= valueInSettings.maxValue) {
-            setErrorValue(true)
-            setValue(valueInSettings.maxValue)
-        } else {
-            setErrorValue(false)
-        }
+        },
     }
 
 
