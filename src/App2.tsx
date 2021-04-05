@@ -23,8 +23,6 @@ function App2() {
         transform: `rotate(${time * 360}deg)`
     })
 
-    // @ts-ignore
-    // @ts-ignore
     return (
         <div>
             {setTimeWithZero(hours * 12)}:
